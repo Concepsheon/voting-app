@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Voting App</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="data:;base64,=">
+   </head>
+  <body>
+    <div class="jumbotron">
+      <h1>FCC Voting App</h1>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">LogIn</button>
+    </div>
+    
+    
+    <div>
+      <h1>Polls</h1>
+      <% if (polls) { %>
+      <ul class="list-group">
+        <% for(var i=0; i < polls.length; i++) { %>
+          <li class="list-group-item"><a href="/users/polls/<%= polls[i]._id %>"><%= polls[i].title %></a></li>
+        <% } %>
+      </ul>
+      <% } %>
+      
+    </div>
+    
+    
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Log In</h4>
+      </div>
+      
+      <div class="modal-body">
+        
+        <form method="post" action="/login">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Username:</label>
+            <input type="text" class="form-control" id="recipient-name" name="username" required/>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Password:</label>
+            <input type="password"  class="form-control" id="message-text" name="password" required/>
+          </div>
+          
+          <p>New User? <a href="/register">Register</a></p>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Login</button>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  </body>
+</html>

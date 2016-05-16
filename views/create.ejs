@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Poll</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+   </head>
+  <body>
+      
+      <form method="post" action="/user/newpoll">
+          <div class="form-group">
+              <input class="form-control" type="text" placeholder="Poll Title" name="title" required/>
+          </div>
+          <div class="form-group">
+              <input class="form-control" type="text" placeholder="Enter labels for poll separated by commas" name="labels" required/>
+          </div>
+          <a class="btn btn-default" href="/user/polls">Cancel</a>
+          <button type="submit" class="btn btn-primary">Create New Poll</button>
+      </form>
+      
+  </body>
+</html>

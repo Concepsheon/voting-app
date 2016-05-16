@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= poll.title %> Poll</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="data:;base64,=">
+   </head>
+  <body>
+      
+      <div class="canvas-container">
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <div>
+          <select id="select"></select>
+      </div>
+      
+      <a class="btn btn-default" href="/">Back</a>
+      <button class="btn btn-primary" type="sumbit">Vote</button>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.1/js.cookie.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>
+      <script>
+        var ctx = document.getElementById("myChart");
+        
+        
+        
+        var defaultData = [<%= poll.data %>];
+        var labels = <%- labels %>;
+        var pieData;
+        
+       if(defaultData.length === 0){
+           for(var i = 0; i < labels.length; i++){
+               defaultData[i] = 0
+           }
+           pieData = defaultData
+       } else {
+           pieData = defaultData
+       }
+        
+        
+        var data = {
+            labels: labels,
+            datasets: [
+                {
+                    data: pieData,
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "lightblue"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56",
+                            "lightblue"
+                            ]
+                }]
+        };
+        
+        var myPieChart = new Chart(ctx,{
+            type: 'pie',
+            data: data
+        });
+        
+        for(var i = 0; i < labels.length; i++){
+            $("#select").append("<option value=" + i + ">" + labels[i] + "</option>")
+        }
+        
+        
+        $("button").click(function(e){
+            
+            e.preventDefault();
+            
+            var add = $("#select").val();
+            defaultData[add] += 1;
+            pieData = defaultData.slice(0)
+            console.log(defaultData)
+            myPieChart.update()
+            Cookies.set("data", JSON.stringify(pieData));
+            console.log('cookie set', pieData)
+        })
+        
+      </script>
+  </body>
+</html>
